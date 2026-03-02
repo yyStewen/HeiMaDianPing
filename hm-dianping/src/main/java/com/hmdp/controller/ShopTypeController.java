@@ -27,8 +27,14 @@ public class ShopTypeController {
 
     @GetMapping("list")
     public Result queryTypeList() {
-        List<ShopType> typeList = typeService
-                .query().orderByAsc("sort").list();
-        return Result.ok(typeList);
+        /**
+         * TODO
+         * 用redis修改：缓存商店类型，提高查询商店类型的速度
+         */
+//        List<ShopType> typeList = typeService
+//                .query().orderByAsc("sort").list();
+//        return Result.ok(typeList);
+
+        return typeService.queryTypeList();
     }
 }
