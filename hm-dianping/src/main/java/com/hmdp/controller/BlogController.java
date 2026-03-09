@@ -33,6 +33,7 @@ public class BlogController {
 
     @PostMapping
     public Result saveBlog(@RequestBody Blog blog) {
+        /**
         // 获取登录用户
         UserDTO user = UserHolder.getUser();
         blog.setUserId(user.getId());
@@ -40,6 +41,8 @@ public class BlogController {
         blogService.save(blog);
         // 返回id
         return Result.ok(blog.getId());
+         **/
+        return blogService.saveBlog(blog);
     }
 
     @PutMapping("/like/{id}")
@@ -112,5 +115,11 @@ public class BlogController {
         // 获取当前页数据
         List<Blog> records = page.getRecords();
         return Result.ok(records);
+    }
+
+    //滚动分页查询关注者
+    @GetMapping("/of/follow")
+    public Result queryBlogOfFollow(@RequestParam("lastId") Long max, @RequestParam(value = "offset", defaultValue = "0") Integer offset) {
+        return blogService.queryBlogOfFollow(max, offset);
     }
 }
