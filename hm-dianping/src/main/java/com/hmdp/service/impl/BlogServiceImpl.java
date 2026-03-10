@@ -207,8 +207,15 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
             }
 
         }
-
-
+/**
+        if (ids.isEmpty()) {
+            ScrollResult scrollResult = new ScrollResult();
+            scrollResult.setList(Collections.emptyList());
+            scrollResult.setOffset(os);
+            scrollResult.setMinTime(minTime);
+            return Result.ok(scrollResult);
+        }
+ **/
         //4.根据id查询blog
         List<Blog> blogs = query().in("id", ids).last("ORDER BY FIELD(id," + StrUtil.join(",", ids) + ")").list();
 
